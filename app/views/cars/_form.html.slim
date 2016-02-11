@@ -1,0 +1,37 @@
+= form_for car, html: { :multipart => true } do |f|
+  - if car.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(car.errors.count, "error")} prohibited this car from being saved:"
+      ul
+        - car.errors.full_messages.each do |message|
+          li = message
+  .controls.controls-row
+    = f.text_field :name, class: 'span3', placeholder: 'Наименование'
+    = f.text_field :pts, class: 'span3', placeholder: 'Номер ПТС'
+  .controls.controls-row
+    = f.text_field :registration_number, class: 'span3', placeholder: 'Гос. номер'
+    = f.text_field :pts_date, class: 'span3', placeholder: 'Дата ПТС'
+
+  .panel.panel-default
+    .panel-body#images_list
+      .row
+        .col-xs-4.col-md-2
+          .thumbnail{ style="height: 110px;" }
+            img.b-photo-upload__photo
+            i.fa.fa-times-circle.b-leave-review-modal__delete-photo
+
+  .controls.controls-row
+    / = f.fields_for :photos do |p|
+    /   = p.file_field :image, multiple: true, name: "photos[image][]"
+
+    / input#photos_ids{name="photos" type="hidden" value=""}
+    / input#album_upload{data-url="/photos" multiple="multiple" name="images[]" type="file"}
+
+    .row.m-t-sm
+      .col-xs-12#add_image_buttons
+        .js-photo-upload-text
+        = text_field_tag 'photos[image][]', nil, class: 'js-file-input', accept: 'image/png,image/gif,image/jpeg,image/jpg', type: :file
+
+  .form-actions 
+    = f.submit 'Сохранить', class: 'btn btn-primary'
+    = button_to 'Назад', root_path, class: 'btn'

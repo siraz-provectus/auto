@@ -1,0 +1,26 @@
+.row
+  .col-lg-12
+    .panel.panel-default
+      .panel-body
+        .table-responsive
+          table.table.borderless
+            thead
+              tr
+                th.text-center
+                  |  #
+                th.text-center
+                  | Наименование
+                th.text-center
+                  |  Гос. номер
+                th.text-center
+                  |  ПТС
+                th.text-center
+                  | Дата ПТС
+                th.text-center
+                  | Фото
+                th.text-center colspan='2'
+                  = link_to 'Новый', new_car_url, class: 'btn btn-info'
+
+            tbody
+              - cars.each do |car|
+                = render 'item', car: car

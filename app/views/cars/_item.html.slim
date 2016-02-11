@@ -1,0 +1,17 @@
+tr{class='car_#{car.id}'}
+  td.text-center.hide-border
+    = car.id
+  td.text-center.hide-border
+    = car.name
+  td.text-center.hide-border
+    = car.registration_number
+  td.text-center.hide-border
+    = car.pts
+  td.text-center.hide-border
+    = car.pts_date
+  td.text-center.hide-border
+    | v
+  td.text-center.hide-border{style = 'width: 60px'}
+    = link_to 'Редак.', edit_car_url(car.id), method: :get, class: 'btn btn-warning'
+  td.text-center.hide-border{style = 'width: 60px'}
+    = link_to 'Удал.', car_url(car.id), method: :delete, class: 'btn btn-danger'

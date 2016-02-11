@@ -25,6 +25,9 @@ gem 'remotipart'
 # pagination
 gem 'kaminari'
 
+# Exposing named methods
+gem 'decent_exposure'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
