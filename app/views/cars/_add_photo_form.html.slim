@@ -1,0 +1,4 @@
+.js-add_photo_form
+  = form_for item, html: { multipart: true }, remote: true, authenticity_token: true do |p|
+    = p.file_field :image, class: 'hidden js-file-input-upload', accept: 'image/png,image/gif,image/jpeg,image/jpg'
+    = p.text_field :car_id, class: 'hidden'

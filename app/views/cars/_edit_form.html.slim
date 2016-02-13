@@ -21,20 +21,29 @@
   .panel.panel-default
     .panel-body
       .row#images_list
-        .col-xs-4.col-md-2.js-thumbnail-container
-          button type="button" class="js-remove-image close" data-dismiss="modal" aria-label="Close"
-            span aria-hidden="true"
-              | &times;
-          .thumbnail{ style="height: 110px;" }
-            img.b-photo-upload__photo#image_1
+        - car.photos.each do |photo|
+          .col-xs-4.col-md-2.js-thumbnail-container
+            button type="button" class="js-remove-image close" data-dismiss="modal" aria-label="Close"
+              span aria-hidden="true"
+                | &times;
+            .thumbnail{ style="height: 110px;" }
+              img.car_thumbnail{src="#{photo.image.url}" id="image_#{photo.id}" data-car-id="#{car.id}"}
 
+        .col-xs-4.col-md-2.js-thumbnail-container
+            button type="button" class="js-remove-image close" data-dismiss="modal" aria-label="Close"
+              span aria-hidden="true"
+                | &times;
+            .thumbnail.js-image-thumbnail-btn{ style="height: 110px;" }
+              img.b-photo-upload__photo{data-car-id="#{car.id}"}
 
   .controls.controls-row
     .row.m-t-sm
       .col-xs-12#add_image_buttons
         .js-photo-upload-text
-        = text_field_tag 'photos[image][]', nil, class: 'js-file-input', accept: 'image/png,image/gif,image/jpeg,image/jpg', type: :file, id: 'image_1'
+
 
   .form-actions
     = f.submit 'Сохранить', class: 'btn btn-primary'
     = button_to 'Назад', root_path, class: 'btn'
+
+= render 'add_photo_form', item: photo

@@ -1,6 +1,8 @@
 script#image_item_template type="text/x-handlebars-template"
-  .row
-    .col-xs-4.col-md-2
-      .thumbnail  style="height: 110px;"
-        img.b-photo-upload__photo
-        i.fa.fa-times-circle.b-leave-review-modal__delete-photo
+  .col-xs-4.col-md-2.js-thumbnail-container
+    button type="button" class="js-remove-image close" data-dismiss="modal" aria-label="Close"
+      span aria-hidden="true"
+        | &times;
+    .thumbnail.js-image-thumbnail-btn  style="height: 110px;"
+      img.b-photo-upload__photo id="image_{{image_id}}"
+      i.fa.fa-times-circle.b-leave-review-modal__delete-photo

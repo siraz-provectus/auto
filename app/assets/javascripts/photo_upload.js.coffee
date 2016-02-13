@@ -1,35 +1,29 @@
 window.PhotoUpload =
   init: ->
-    $(document).on 'click', '.js-file-input', (e) ->
-	    $(this).change(
-	      (event) ->
-	        input = $(event.currentTarget)
-	        file = input[0].files[0]
-	        window.upload_file = file
-	        if file.size > 1000000
-	          $('.js-photo-upload-text').css('color', 'red').text('Фотография должна быть не более 1 Mb')
-	          $('img.b-photo-upload__photo').attr("src", null)
-	          $('.js-feedback-submit').addClass('disabled')
-	          return
-	        reader = new FileReader()
-	        reader.onload = (e) ->
-	          image_base64 = e.target.result
-	          $('img.b-photo-upload__photo').attr("src", image_base64).width(140)
-	          $('.js-photo-upload-text').text('')
+    $(document).on 'click', '.js-image-thumbnail-btn', (e) ->
+      e.preventDefault()
+      console.log '--------upload----'
+      $('.js-file-input-upload').trigger 'click'
 
-	          image_item_template = Handlebars.compile($('#image_item_template').html())
-	          $('#images_list').append(image_item_template())
+      $('.js-file-input-upload').change(
+        console.log '--------upload 2----'
+        (event) ->
+          input = $(event.currentTarget)
+          file = input[0].files[0]
+          window.upload_file = file
+          if file.size > 10000000
+            $('.js-photo-upload-text').css('color', 'red').text('Фотография должна быть не более 10 Mb')
+            $('img.b-photo-upload__photo').attr("src", null)
+            return
+          reader = new FileReader()
+          reader.onload = (e) ->
+            image_base64 = e.target.result
+            $('img.b-photo-upload__photo').attr("src", image_base64).height(100).width(130)
+            $('.js-photo-upload-text').text('')
+            console.log '--------submit----'
+            $('#new_photo').submit()
 
-	          add_item_button_template = Handlebars.compile($('#add_item_button_template').html())
-	          $('#add_image_buttons').append(add_item_button_template())
+          reader.readAsDataURL file
 
-	          return
-
-	        reader.readAsDataURL file
-	        # fileName = $(this).val();
-	        # if fileName.length > 17
-	        #   fileName = fileName.substring(0, 14) + '...'
-	        # $('.js-photo-upload-text').removeAttr('style').text(fileName)
-	        return false
-	      )
-
+          return false
+        )

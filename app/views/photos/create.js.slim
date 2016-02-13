@@ -1,0 +1,7 @@
+| $('img.b-photo-upload__photo').attr("data-car-id","#{photo.car_id}");
+| $('img.b-photo-upload__photo').attr("src","#{photo.image.url}");
+| $('img.b-photo-upload__photo').attr("id","image_#{photo.id}");
+| $('img.b-photo-upload__photo').removeClass("b-photo-upload__photo");
+| $('.js-image-thumbnail-btn').removeClass("js-image-thumbnail-btn");
+| image_item_template = Handlebars.compile($('#image_item_template').html());
+| $('#images_list').append(image_item_template());

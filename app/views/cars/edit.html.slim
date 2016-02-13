@@ -2,12 +2,12 @@
   .row
     .col-lg-12
       h3.page-header
-				| Новый автомобиль
+        | Новый автомобиль
 
-= render 'form'
+= render 'edit_form'
 = render "handlebars_templates/photos/image_item_template"
 = render "handlebars_templates/photos/add_item_button_template"
 = content_for(:javascript_code) do
-  | PhotoPreview.init();
+  | PhotoUpload.init();
   | DatePicker.init();
-  | RemovePreview.init();
+  | RemovePhoto.init();

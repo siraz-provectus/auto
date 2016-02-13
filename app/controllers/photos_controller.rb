@@ -1,16 +1,18 @@
 class PhotosController < ApplicationController
-# truncated for brevity.
+  expose :photo, attributes: :photo_params
+
   def create
-    params[:images].each{ |image|
-      @photo = Photo.create(image: image)
-      if @photo.save
-        respond_to do |format|
-          format.html { render json: @photo.to_jq_upload, content_type: 'text/html', layout: false }
-          format.json { render json: @photo.to_jq_upload }
-        end
-      else
-        render json: { error: @photo.errors.full_messages }, status: 304
-      end
-    }
+    self.photo = Photo.create!(photo_params)
+    @new_photo = Photo.new(car_id: photo_params[:car_id])
+  end
+
+  def destroy
+    photo.destroy!
+  end
+
+  private
+
+  def photo_params
+    params.require(:photo).permit(:car_id, :image)
   end
 end
